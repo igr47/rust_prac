@@ -1,0 +1,1 @@
+/home/igris/git_projects/rust_prac/rust2/activity_1/target/debug/vectors: /home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/vectors.rs

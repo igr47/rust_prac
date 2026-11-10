@@ -1,0 +1,1 @@
+rd_("AoReturns the argument unchanged.00000000BaCalls <code>U::from(self)</code>.00000000BlMain function Calls the arithmetic function.CjFunction arithmetic Takes two numbers of i32 and and a \xe2\x80\xa6CjFunction number_checker Checks the numbers 1, 2, 3 and \xe2\x80\xa6")

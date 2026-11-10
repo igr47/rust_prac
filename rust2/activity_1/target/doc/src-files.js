@@ -1,0 +1,2 @@
+createSrcSidebar('[["activity_1",["",[],["main.rs"]]],["enum",["",[],["enum.rs"]]],["expressions",["",[],["expressions.rs"]]],["impl",["",[],["impl.rs"]]],["loop",["",[],["loop.rs"]]],["match",["",[],["match.rs"]]],["option",["",[],["option.rs"]]],["ownership",["",[],["ownership.rs"]]],["strings",["",[],["strings.rs"]]],["structs",["",[],["structs.rs"]]],["tuples",["",[],["tuples.rs"]]],["vectors",["",[],["vectors.rs"]]],["while",["",[],["while.rs"]]]]');
+//{"start":19,"fragment_lengths":[34,29,43,29,29,31,33,39,35,35,33,35,31]}

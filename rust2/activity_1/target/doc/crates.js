@@ -1,0 +1,2 @@
+window.ALL_CRATES = ["activity_1","enum","expressions","impl","loop","match","option","ownership","strings","structs","tuples","vectors","while"];
+//{"start":21,"fragment_lengths":[12,7,14,7,7,8,9,12,10,10,9,10,8]}

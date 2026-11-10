@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["arithmetic","determinant","main","number_checker"]};

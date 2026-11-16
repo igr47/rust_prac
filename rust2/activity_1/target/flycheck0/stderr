@@ -1,12 +1,49 @@
-   0.141344726s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="threads"}: cargo::core::compiler::fingerprint: stale: changed "/home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/threads.rs"
-   0.141385291s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="threads"}: cargo::core::compiler::fingerprint:           (vs) "/home/igris/git_projects/rust_prac/rust2/activity_1/target/debug/.fingerprint/activity_1-ea398ce52de80420/dep-bin-threads"
-   0.141409404s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="threads"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1794821869, nanos: 807666527 } < FileTime { seconds: 1794822093, nanos: 703211860 }
-   0.141508462s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="threads"}: cargo::core::compiler::fingerprint: fingerprint dirty for activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1)/Check { test: false }/TargetInner { name: "threads", doc: true, ..: with_path("/home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/threads.rs", Edition2024) }
-   0.141558038s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="threads"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/home/igris/git_projects/rust_prac/rust2/activity_1/target/debug/.fingerprint/activity_1-ea398ce52de80420/dep-bin-threads", reference_mtime: FileTime { seconds: 1794821869, nanos: 807666527 }, stale: "/home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/threads.rs", stale_mtime: FileTime { seconds: 1794822093, nanos: 703211860 } }))
-   0.142325211s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="threads"}: cargo::core::compiler::fingerprint: stale: changed "/home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/threads.rs"
-   0.142344676s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="threads"}: cargo::core::compiler::fingerprint:           (vs) "/home/igris/git_projects/rust_prac/rust2/activity_1/target/debug/.fingerprint/activity_1-2db682d3d4ada674/dep-test-bin-threads"
-   0.142356041s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="threads"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1794821869, nanos: 810666534 } < FileTime { seconds: 1794822093, nanos: 703211860 }
-   0.142419175s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="threads"}: cargo::core::compiler::fingerprint: fingerprint dirty for activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1)/Check { test: true }/TargetInner { name: "threads", doc: true, ..: with_path("/home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/threads.rs", Edition2024) }
-   0.142446670s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="threads"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/home/igris/git_projects/rust_prac/rust2/activity_1/target/debug/.fingerprint/activity_1-2db682d3d4ada674/dep-test-bin-threads", reference_mtime: FileTime { seconds: 1794821869, nanos: 810666534 }, stale: "/home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/threads.rs", stale_mtime: FileTime { seconds: 1794822093, nanos: 703211860 } }))
+   0.052493240s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="mutex"}: cargo::core::compiler::fingerprint: fingerprint error for activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1)/Check { test: false }/TargetInner { name: "mutex", doc: true, ..: with_path("/home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/mutex.rs", Edition2024) }
+   0.052539942s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="mutex"}: cargo::core::compiler::fingerprint:     err: failed to read `/home/igris/git_projects/rust_prac/rust2/activity_1/target/debug/.fingerprint/activity_1-eaca4cd4dabcd512/bin-mutex`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: cargo_util::paths::read_bytes
+   1: cargo_util::paths::read
+   2: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   3: cargo::core::compiler::fingerprint::prepare_target
+   4: cargo::core::compiler::compile
+   5: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   6: cargo::ops::cargo_compile::compile_with_exec
+   7: cargo::ops::cargo_compile::compile
+   8: cargo::commands::check::exec
+   9: <cargo::cli::Exec>::exec
+  10: cargo::main
+  11: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  12: std::rt::lang_start::<()>::{closure#0}
+  13: <&dyn core::ops::function::Fn<(), Output = i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe as core::ops::function::FnOnce<()>>::call_once
+             at /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/core/src/ops/function.rs:287:21
+  14: std::panicking::catch_unwind::do_call::<&dyn core::ops::function::Fn<(), Output = i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe, i32>
+             at /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/std/src/panicking.rs:576:43
+  15: std::panicking::catch_unwind::<i32, &dyn core::ops::function::Fn<(), Output = i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe>
+             at /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/std/src/panicking.rs:544:19
+  16: std::panic::catch_unwind::<&dyn core::ops::function::Fn<(), Output = i32> + core::marker::Sync + core::panic::unwind_safe::RefUnwindSafe, i32>
+             at /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/std/src/panic.rs:359:14
+  17: std::rt::lang_start_internal::{closure#0}
+             at /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/std/src/rt.rs:175:24
+  18: std::panicking::catch_unwind::do_call::<std::rt::lang_start_internal::{closure#0}, isize>
+             at /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/std/src/panicking.rs:576:43
+  19: std::panicking::catch_unwind::<isize, std::rt::lang_start_internal::{closure#0}>
+             at /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/std/src/panicking.rs:544:19
+  20: std::panic::catch_unwind::<std::rt::lang_start_internal::{closure#0}, isize>
+             at /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/std/src/panic.rs:359:14
+  21: std::rt::lang_start_internal
+             at /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/std/src/rt.rs:171:5
+  22: main
+  23: <unknown>
+  24: __libc_start_main
+  25: <unknown>
+   0.089519120s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="mutex"}: cargo::core::compiler::fingerprint: stale: changed "/home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/mutex.rs"
+   0.089529165s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="mutex"}: cargo::core::compiler::fingerprint:           (vs) "/home/igris/git_projects/rust_prac/rust2/activity_1/target/debug/.fingerprint/activity_1-1dde5af2a3b50c56/dep-test-bin-mutex"
+   0.089534838s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="mutex"}: cargo::core::compiler::fingerprint:                FileTime { seconds: 1794823898, nanos: 488889028 } < FileTime { seconds: 1794824200, nanos: 735684478 }
+   0.089568464s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="mutex"}: cargo::core::compiler::fingerprint: fingerprint dirty for activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1)/Check { test: true }/TargetInner { name: "mutex", doc: true, ..: with_path("/home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/mutex.rs", Edition2024) }
+   0.089581593s  INFO prepare_target{force=false package_id=activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1) target="mutex"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(ChangedFile { reference: "/home/igris/git_projects/rust_prac/rust2/activity_1/target/debug/.fingerprint/activity_1-1dde5af2a3b50c56/dep-test-bin-mutex", reference_mtime: FileTime { seconds: 1794823898, nanos: 488889028 }, stale: "/home/igris/git_projects/rust_prac/rust2/activity_1/src/bin/mutex.rs", stale_mtime: FileTime { seconds: 1794824200, nanos: 735684478 } }))
     Checking activity_1 v0.1.0 (/home/igris/git_projects/rust_prac/rust2/activity_1)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.14s

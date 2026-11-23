@@ -1,4 +1,4 @@
-//! Hardcoded shell-level commands (handled by the UI, never sent to the backend)
+//! Hardcoded shell-level commands (handled by the UI, never sent to the backend).
 
 use crate::app::LineKind;
 
@@ -9,18 +9,18 @@ pub enum ShellCommand {
     ClearAll,
     Theme(Option<String>),
     Themes,
-    Transparent(Option<bool>), // None = toggle,
+    Transparent(Option<bool>), // None = toggle
     Help,
     Splash,
     Quit,
 }
 
-/// Returns Some(cmd) if `line` is a shell command, None if it should go to the backend 
+/// Returns Some(cmd) if `line` is a shell command, None if it should go to the backend.
 pub fn parse(line: &str) -> Option<ShellCommand> {
     let lower = line.trim().to_lowercase();
     let mut parts = lower.split_whitespace();
     let cmd = parts.next()?;
-    let arg = parts.next()?;
+    let arg = parts.next();
 
     match (cmd, arg) {
         ("clear" | "cls", None | Some("results")) => Some(ShellCommand::ClearResults),
@@ -30,7 +30,7 @@ pub fn parse(line: &str) -> Option<ShellCommand> {
         ("themes", _) => Some(ShellCommand::Themes),
         ("transparent" | "transparency", None | Some("toggle")) => Some(ShellCommand::Transparent(None)),
         ("transparent" | "transparency", Some("on" | "true" | "yes")) => {
-            Some(ShellCommand::Transparent(true))
+            Some(ShellCommand::Transparent(Some(true)))
         }
         ("transparent" | "transparency", Some("off" | "false" | "no")) => {
             Some(ShellCommand::Transparent(Some(false)))
@@ -66,6 +66,6 @@ pub fn help_lines() -> Vec<(LineKind, String)> {
         (Info, "  Ctrl+L clear results   Ctrl+K clear input   Ctrl+U clear line".into()),
         (Info, "  Ctrl+T next theme   Ctrl+B transparency   Ctrl+Up/Down scroll input log".into()),
         (Info, "  Esc focus input   Ctrl+C / Ctrl+D quit".into()),
-
     ]
 }
+

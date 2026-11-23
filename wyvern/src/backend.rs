@@ -1,6 +1,6 @@
-//! Mock backend. Runs each query on its own thread and streams event 
-//! over an mpsc chanel - exactly the shape a real engine would use, Will 
-//! replace the body of `run()` later.
+//! MOCK backend. It runs each query on its own thread and streams events back
+//! over an mpsc channel - exactly the shape a real engine would use, so you can
+//! replace the body of `run()` later without touching the UI.
 
 use std::{
     sync::mpsc::Sender,
@@ -10,12 +10,13 @@ use std::{
 
 use crate::app::LineKind;
 
+/// Everything the backend can tell the UI.
 pub enum BackendEvent {
     Line(LineKind, String),
     DatabaseCreated(String),
     TableCreated { db: String, table: String },
     DbSelected(String),
-    /// Sent once when a query is completly done 
+    /// Sent once when a query is completely done.
     Finished,
 }
 
@@ -38,23 +39,23 @@ impl Backend {
 }
 
 const NAMES: [&str; 10] = [
-    "Vyrnath", "Skarn", "Ignis", "Glacior", "Terrok", "Aqualis", "Zephyra", "Noctis", "Lumera", "Draegon", 
+    "Vyrnath", "Skarn", "Ignis", "Glacior", "Terrok", "Aqualis", "Zephyra", "Noctis", "Lumera", "Draegon",
 ];
 const ELEMENTS: [&str; 7] = ["fire", "frost", "earth", "water", "wind", "darkness", "light"];
 const STATUS: [&str; 3] = ["alive", "dormant", "slain"];
-const WIDTHS: [usize, 5] = [4, 14, 10, 11, 8];
+const WIDTHS: [usize; 5] = [4, 14, 10, 11, 8];
 
 fn fmt_row(cells: &[String]) -> String {
-    cells 
+    cells
         .iter()
         .zip(WIDTHS.iter())
-        .map(| (c, w) | format!("{:<w$}", c, w = *w))
-        .collect()::<Vec<_>>()
-        .join(" | ")
+        .map(|(c, w)| format!("{:<w$}", c, w = *w))
+        .collect::<Vec<_>>()
+        .join(" │ ")
 }
 
 fn run(query: &str, current_db: Option<String>, tx: &Sender<BackendEvent>) {
-    // `send` fails only when the ui has quit - Then just stop quietly.
+    // `send` fails only when the UI has quit - then just stop quietly.
     macro_rules! send {
         ($ev:expr) => {
             if tx.send($ev).is_err() {
@@ -65,7 +66,7 @@ fn run(query: &str, current_db: Option<String>, tx: &Sender<BackendEvent>) {
 
     let words: Vec<&str> = query.split_whitespace().collect();
     let first = words.first().map(|w| w.to_lowercase()).unwrap_or_default();
-    let db = current_db.unwrap_or_else(|| "demo".into);
+    let db = current_db.unwrap_or_else(|| "demo".into());
 
     match first.as_str() {
         "select" => {
@@ -73,37 +74,20 @@ fn run(query: &str, current_db: Option<String>, tx: &Sender<BackendEvent>) {
                 .iter()
                 .position(|w| w.eq_ignore_ascii_case("limit"))
                 .and_then(|i| words.get(i + 1))
-                .and_then(|n| n.parse()::<usize>()Ok())
+                .and_then(|n| n.parse::<usize>().ok())
                 .unwrap_or(40);
             let started = Instant::now();
 
             let head: Vec<String> = ["id", "name", "element", "wingspan_m", "status"]
-                 .iter()
-                 .map(|s| s.to_string())
-                 .collect();
+                .iter()
+                .map(|s| s.to_string())
+                .collect();
             send!(BackendEvent::Line(LineKind::Header, fmt_row(&head)));
             let sep = WIDTHS.iter().map(|w| "─".repeat(*w)).collect::<Vec<_>>().join("─┼─");
             send!(BackendEvent::Line(LineKind::Dim, sep));
-
-
-            for i in 0..limit {
-                let row = vec![
-                    (i + 1).to_string(),
-                    format!("{}-{}", NAMES[i % 10], i / 10 + 1),
-                    ELEMENTS[i % 7].to_string(),
-                    format!("{:.1}", 6.0 + ((i * 37) % 90) as f32 / 10.0),
-                    STATUS[i % 3].to_string(),
-                ];
-                send!(BackendEvent::Line(LineKind::Row, fmt_row(&row)));
-                thread::sleep(Duration::from_millis(70)); // simulate rows arriving live
-            }
-            send!(BackendEvent::Line(
-                LineKind::Success,
-                format!("✔ {limit} rows from `{db}` in {:.2?}", started.elapsed())
-            ));            
         }
 
-                "predict" => {
+        "predict" => {
             send!(BackendEvent::Line(LineKind::Info, "predicting...".into()));
             for i in 1..=12usize {
                 thread::sleep(Duration::from_millis(150));
@@ -152,3 +136,4 @@ fn run(query: &str, current_db: Option<String>, tx: &Sender<BackendEvent>) {
         }
     }
 }
+
